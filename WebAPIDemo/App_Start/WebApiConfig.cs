@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebAPIDemo
 {
@@ -9,8 +10,12 @@ namespace WebAPIDemo
     {
         public static void Register(HttpConfiguration config)
         {
+            //跨域
+            //"跨域资源共享"（Cross-origin resource sharing）
+            var cors = new EnableCorsAttribute("*", "*", "GET, POST, OPTIONS");
+            config.EnableCors(cors);
 
-            //使用路由属性
+            //使用特性路由
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
